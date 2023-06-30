@@ -2,6 +2,8 @@
 
 ## Results
 
+![histogram](https://github.com/szabolcsdombi/optimization-demo/assets/11232402/2ea8efed-aace-43fd-a142-3dc766471528)
+
 ```
 ------------------------------------------ benchmark: 3 tests ------------------------------------------
 Name (time in ns)             Mean            StdDev                Median            OPS (Kops/s)
