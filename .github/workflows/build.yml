@@ -27,10 +27,4 @@ jobs:
         run: docker build . -t test
 
       - name: run
-        run: docker run --rm -v `pwd`/out:/out test
-
-      - name: upload
-        uses: actions/upload-artifact@v3
-        with:
-          name: histogram
-          path: out
+        run: docker run --rm test
