@@ -27,7 +27,7 @@ jobs:
         run: docker build . -t test
 
       - name: run
-        run: docker run --rm -it -v `pwd`/out:/out test
+        run: docker run --rm -v `pwd`/out:/out test
 
       - name: upload
         uses: actions/upload-artifact@v3
