@@ -1,0 +1,14 @@
+.vscode
+build
+dist
+
+.pytest_cache
+.benchmarks
+__pycache__
+
+*.egg-info
+*.pyc
+*.pyd
+*.so
+
+*.svg
