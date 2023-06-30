@@ -1,0 +1,36 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: setup
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          architecture: x64
+
+      - name: build
+        run: docker build . -t test
+
+      - name: run
+        run: docker run --rm -it -v `pwd`/out:/out test
+
+      - name: upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: histogram
+          path: out
