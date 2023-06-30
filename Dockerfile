@@ -6,7 +6,7 @@ RUN pip install /mymodule
 
 COPY test.py /test.py
 
-CMD python -m pytest test.py \
+CMD python -W ignore -m pytest test.py \
     --benchmark-disable-gc \
     --benchmark-warmup=on \
     --benchmark-min-time=1.0 \
