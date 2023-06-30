@@ -8,8 +8,8 @@ def py_accept(salt: str) -> str:
     return b64encode(sha1((salt + '258EAFA5-E914-47DA-95CA-C5AB0DC85B11').encode()).digest()).decode()
 
 
-def magic_accept(salt: str) -> str:
-    return 's3pPLMBiTxaQ9kYGzzhZRbK+xOo='
+# def magic_accept(salt: str) -> str:
+#     return 's3pPLMBiTxaQ9kYGzzhZRbK+xOo='
 
 
 def test_python_code(benchmark):
@@ -20,6 +20,6 @@ def test_optimized_code(benchmark):
     assert benchmark(c_accept, 'dGhlIHNhbXBsZSBub25jZQ==') == 's3pPLMBiTxaQ9kYGzzhZRbK+xOo='
 
 
-def test_magic_code(benchmark):
-    assert benchmark(magic_accept, 'dGhlIHNhbXBsZSBub25jZQ==') == 's3pPLMBiTxaQ9kYGzzhZRbK+xOo='
+# def test_magic_code(benchmark):
+#     assert benchmark(magic_accept, 'dGhlIHNhbXBsZSBub25jZQ==') == 's3pPLMBiTxaQ9kYGzzhZRbK+xOo='
 
