@@ -260,9 +260,9 @@ void sec_websocket_accept(const void * src, void * dst) {
 }
 
 PyObject * c_accept(PyObject * self, PyObject * arg) {
-    char key[28];
-    sec_websocket_accept(PyUnicode_AsUTF8(arg), key);
-    return PyUnicode_FromStringAndSize(key, 28);
+    char result[28];
+    sec_websocket_accept(PyUnicode_AsUTF8(arg), result);
+    return PyUnicode_FromStringAndSize(result, 28);
 }
 
 PyMethodDef module_methods[] = {
