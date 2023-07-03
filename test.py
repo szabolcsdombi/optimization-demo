@@ -5,6 +5,8 @@ from mymodule import c_accept
 
 
 def py_accept(key: str) -> str:
+    if not isinstance(key, str) or len(key) != 24:
+        raise ValueError('invalid input')
     return b64encode(sha1((key + '258EAFA5-E914-47DA-95CA-C5AB0DC85B11').encode()).digest()).decode()
 
 
