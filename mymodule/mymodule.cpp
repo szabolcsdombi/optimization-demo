@@ -260,12 +260,14 @@ void sec_websocket_accept(const void * src, void * dst) {
 }
 
 PyObject * c_accept(PyObject * self, PyObject * arg) {
-    if (!PyUnicode_Check(arg) || PyUnicode_GetLength(arg) != 24) [[unlikely]] {
+    Py_ssize_t size = 0;
+    const char * key = PyUnicode_AsUTF8AndSize(arg, &size);
+    if (!key || size != 24) {
         PyErr_Format(PyExc_ValueError, "invalid input");
         return NULL;
     }
     char result[28];
-    sec_websocket_accept(PyUnicode_AsUTF8(arg), result);
+    sec_websocket_accept(key, result);
     return PyUnicode_FromStringAndSize(result, 28);
 }
 
