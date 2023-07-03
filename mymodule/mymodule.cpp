@@ -261,7 +261,18 @@ void sec_websocket_accept(const void * src, void * dst) {
 
 PyObject * c_accept(PyObject * self, PyObject * arg) {
     char result[28];
-    sec_websocket_accept(PyUnicode_AsUTF8(arg), result);
+    const char* src;
+    Py_ssize_t len;
+    src = PyUnicode_AsUTF8AndSize(arg, &len);
+    if (src == NULL) {
+        // error will have been set by Python
+        return NULL;
+    }
+    if (len != 24) {
+        PyErr_SetString(PyExc_ValueError, "Invalid length");
+        return NULL;
+    }
+    sec_websocket_accept(src, result);
     return PyUnicode_FromStringAndSize(result, 28);
 }
 
