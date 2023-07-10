@@ -84,7 +84,13 @@ void sec_websocket_accept(const void * src, void * dst) {
 
 PyObject * c_accept(PyObject * self, PyObject * arg) {
     char result[28];
-    sec_websocket_accept(PyUnicode_AsUTF8(arg), result);
+    Py_ssize_t len = 0;
+    const char * key = PyUnicode_AsUTF8AndSize(arg, &len);
+    if (!key || len != 24) {
+        PyErr_SetString(PyExc_ValueError, "invalid key");
+        return NULL;
+    }
+    sec_websocket_accept(key, result);
     return PyUnicode_FromStringAndSize(result, 28);
 }
 
