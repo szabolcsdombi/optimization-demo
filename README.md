@@ -136,16 +136,16 @@ def test_optimized_code(benchmark):
 ## Results
 
 ```
-----------------------------------------------------------------------------------------------------------
-Name (time in ns)            Mean            StdDev                Median           OPS (Kops/s)
-----------------------------------------------------------------------------------------------------------
-test_optimized_code      317.0102 (1.0)      0.0384 (1.0)        317.0121 (1.0)       3,154.4725 (1.0)
-test_python_code       1,149.9825 (3.63)     0.8864 (23.10)    1,149.8373 (3.63)        869.5785 (0.28)
-----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
+Name (time in ns)           Mean            StdDev              Median            OPS (Mops/s)
+--------------------------------------------------------------------------------------------------------
+test_optimized_code     208.0669 (1.0)      0.1062 (1.0)      208.0665 (1.0)            4.8061 (1.0)
+test_python_code        893.2082 (4.29)     6.2278 (58.63)    889.6251 (4.28)           1.1196 (0.23)
+--------------------------------------------------------------------------------------------------------
 ```
 
-- It seems our Python code did really well. It can execute 869k calls per second.
-- It is also clear our C++ variant is 3.63x faster, clocking at 3.15m calls per second.
+- It seems our Python code did really well. It can execute 1.1m calls per second.
+- It is also clear our C++ variant is 4.29x faster, clocking at 4.8m calls per second.
 
 Amazing! Replacing a tiny bit of code that seems not optimizable has a significant effect.
 
@@ -170,13 +170,13 @@ def magic_accept(key: str) -> str:
 Silly, but indeed it passes the test.
 
 ```
-----------------------------------------------------------------------------------------------------------
-Name (time in ns)            Mean            StdDev                Median           OPS (Kops/s)
-----------------------------------------------------------------------------------------------------------
-test_magic_code           83.1061 (1.0)      0.7204 (22.09)       82.8925 (1.0)      12,032.8104 (1.0)
-test_optimized_code      338.3712 (4.07)     0.0326 (1.0)        338.3669 (4.08)      2,955.3341 (0.25)
-test_python_code       1,288.4041 (15.50)    0.6493 (19.91)    1,288.4681 (15.54)       776.1540 (0.06)
-----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
+Name (time in ns)           Mean            StdDev              Median            OPS (Mops/s)
+--------------------------------------------------------------------------------------------------------
+test_magic_code          70.7236 (1.0)      0.0584 (1.0)       70.7438 (1.0)           14.1396 (1.0)
+test_optimized_code     210.7457 (2.98)     0.2183 (3.74)     210.7261 (2.98)           4.7451 (0.34)
+test_python_code        912.7083 (12.91)    5.5000 (94.24)    912.7722 (12.90)          1.0956 (0.08)
+-------------------------------------------------------------------------------------------------------
 ```
 
 The dissambled version seems to be simple too.
@@ -191,10 +191,10 @@ The dissambled version seems to be simple too.
 
 So, how this new method compares to our existing ones that do real work?
 
-Supprising as it may sound but our C++ implementation is just 4x slower.
+Supprising as it may sound but our C++ implementation is just 2.98x slower.
 (From measurements and interpretations we are now entering a realm of guessings).
 This could be because of the overhead introduced by calling functions, the interpreter parsing bytecode or our mearuring tools used.
-At 12m calls per second on a single core this is inevitable.
+At 14m calls per second on a single core this is inevitable.
 
 ## Summary
 
