@@ -196,6 +196,13 @@ Supprising as it may sound but our C++ implementation is just 2.98x slower.
 This could be because of the overhead introduced by calling functions, the interpreter parsing bytecode or our mearuring tools used.
 At 14m calls per second on a single core this is inevitable.
 
+## Edit
+
+Previously the best result was 3M keys per second. Actually 4.8M keys per second is possible on an average computer.
+The [github actions](https://github.com/szabolcsdombi/optimization-demo/actions) still produce the original results.
+
+There is an [extension](https://github.com/szabolcsdombi/optimization-demo-rust) to this article.
+
 ## Summary
 
 By implementing a simple task in C++ instead of Python, where the underlying function calls are already implemented in C++, we still can get a significant boost.
